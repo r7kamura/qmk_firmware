@@ -10,7 +10,7 @@
 #define TAPPING_TERM 300
 #define USB_MAX_POWER_CONSUMPTION 100
 
-#define OLED_UPDATE_INTERVAL 100
+// #define OLED_UPDATE_INTERVAL 100
 #define OLED_TIMEOUT 60000
 
 // 薙刀式の編集モード、固有名詞が不要であればコメントアウト
