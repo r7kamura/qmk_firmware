@@ -33,8 +33,6 @@ enum custom_keycodes {
   KANA2,
 };
 
-uint32_t oled_sleep_timer;
-
 #define ALTEISU LALT_T(EISU)
 #define ALTKANA RALT_T(KANA2)
 #define MOLOWER MO(_LOWER)
@@ -112,13 +110,9 @@ void keyboard_post_init_user(void) {
     default:
       switchOS(NG_WIN);
   }
-
-  oled_sleep_timer = timer_read32() + OLED_TIMEOUT;
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  oled_sleep_timer = timer_read32() + OLED_TIMEOUT;
-
   switch (keycode) {
     case EISU:
       if (record->event.pressed) {
