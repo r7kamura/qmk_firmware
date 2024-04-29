@@ -37,8 +37,10 @@ enum custom_keycodes {
 #define CTLKANA RCTL_T(KANA2)
 #define MOLOWER MO(_LOWER)
 #define MORAISE MO(_RAISE)
-#define SFTENT RSFT_T(KC_ENT)
+#define SFTENT LSFT_T(KC_ENT)
 #define SFTSPC LSFT_T(KC_SPC)
+#define VOLUP KC_AUDIO_VOL_UP
+#define VOLDN KC_AUDIO_VOL_DOWN
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_split_3x6_3_ex2(
@@ -47,9 +49,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
        KC_TAB,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,  KC_END,    KC_PGDN,    KC_H,    KC_J,    KC_K,    KC_L, JP_SCLN, KC_QUOT,
   //|--------+--------+--------+--------+--------+--------+--------'  `--------+--------+--------+--------+--------+--------+--------|
-      KC_LALT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, JP_COMM,  JP_DOT, JP_SLSH, KC_RWIN,
+      KC_LWIN,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, JP_COMM,  JP_DOT, JP_SLSH, KC_RALT,
   //|--------+--------+--------+--------+--------+--------+--------.  ,--------+--------+--------+--------+--------+--------+--------|
-                                          MOLOWER, CTLEISU,  SFTSPC,     SFTENT, CTLKANA, MOLOWER
+                                          MOLOWER,  SFTSPC, CTLEISU,    CTLKANA,  SFTENT, MOLOWER
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -57,23 +59,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,--------------------------------------------------------------.  ,--------------------------------------------------------------.
        KC_ESC,    NG_Q,    NG_W,    NG_E,    NG_R,    NG_T, KC_HOME,    KC_PGUP,    NG_Y,    NG_U,    NG_I,    NG_O,   NG_P,  KC_BSPC,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-       KC_TAB,    NG_A,    NG_S,    NG_D,    NG_F,    NG_G,  KC_END,    KC_PGDN,    NG_H,    NG_J,    NG_K,    NG_L, NG_SCLN, _______,
+       KC_TAB,    NG_A,    NG_S,    NG_D,    NG_F,    NG_G,  KC_END,    KC_PGDN,    NG_H,    NG_J,    NG_K,    NG_L, NG_SCLN,    NG_N,
   //|--------+--------+--------+--------+--------+--------+--------'  `--------+--------+--------+--------+--------+--------+--------|
-      KC_LALT,    NG_Z,    NG_X,    NG_C,    NG_V,    NG_B,                         NG_N,    NG_M, NG_COMM,  NG_DOT, NG_SLSH, KC_RWIN,
+      KC_LWIN,    NG_Z,    NG_X,    NG_C,    NG_V,    NG_B,                         NG_N,    NG_M, NG_COMM,  NG_DOT, NG_SLSH, KC_RALT,
   //|--------+--------+--------+--------+--------+--------+--------.  ,--------+--------+--------+--------+--------+--------+--------|
-                                          MOLOWER, CTLEISU,  SFTSPC,     SFTENT, CTLKANA, MOLOWER
+                                          MOLOWER, NG_SHFT, CTLEISU,    CTLKANA, NG_SHFT2, MOLOWER
                                       //`--------------------------'  `--------------------------'
   ),
 
   [_LOWER] = LAYOUT_split_3x6_3_ex2(
   //,--------------------------------------------------------------.  ,--------------------------------------------------------------.
-       JP_DLR, JP_PERC,    KC_7,    KC_8,    KC_9, JP_MINS,   KC_F4,    KC_VOLD,   JP_AT, JP_HASH,   KC_UP, JP_LCBR, JP_RCBR,  KC_DEL,
+       JP_DLR, JP_PERC,    KC_7,    KC_8,    KC_9, JP_MINS,   KC_F4,      VOLUP,   JP_AT, JP_HASH,   KC_UP, JP_LCBR, JP_RCBR,  KC_DEL,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-      JP_CIRC, JP_ASTR,    KC_4,    KC_5,    KC_6, JP_PLUS,  KC_F11,    KC_VOLU, JP_UNDS, KC_LEFT, KC_DOWN,KC_RIGHT, JP_LBRC, JP_RBRC,
+      JP_CIRC, JP_QUOT,    KC_4,    KC_5,    KC_6, JP_DQUO,  KC_F11,      VOLDN, JP_UNDS, KC_LEFT, KC_DOWN,KC_RIGHT, JP_LBRC, JP_RBRC,
   //|--------+--------+--------+--------+--------+--------+--------'  `--------+--------+--------+--------+--------+--------+--------|
-      KC_LALT,    KC_0,    KC_1,    KC_2,    KC_3,  JP_EQL,                      JP_AMPR, JP_LPRN, JP_RPRN, JP_BSLS, JP_EXLM, KC_RWIN,
+      KC_LWIN,    KC_0,    KC_1,    KC_2,    KC_3,  JP_EQL,                      JP_AMPR, JP_LPRN, JP_RPRN, JP_BSLS, JP_EXLM, KC_RALT,
   //|--------+--------+--------+--------+--------+--------+--------.  ,--------+--------+--------+--------+--------+--------+--------|
-                                          _______, CTLEISU,  SFTSPC,     SFTENT, CTLKANA, _______
+                                          _______,  SFTSPC, CTLEISU,    CTLKANA, SFTENT,  _______
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -113,19 +115,21 @@ void keyboard_post_init_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case EISU:
-      if (record->event.pressed) {
-        naginata_off();
-      }
-      return false;
-      break;
-    case KANA2:
-      if (record->event.pressed) {
-        naginata_on();
-      }
-      return false;
-      break;
+  if (record->tap.count) {
+    switch (keycode) {
+      case CTLEISU:
+        if (record->event.pressed) {
+          naginata_off();
+        }
+        return false;
+        break;
+      case CTLKANA:
+        if (record->event.pressed) {
+          naginata_on();
+        }
+        return false;
+        break;
+    }
   }
 
   if (!process_naginata(keycode, record))
